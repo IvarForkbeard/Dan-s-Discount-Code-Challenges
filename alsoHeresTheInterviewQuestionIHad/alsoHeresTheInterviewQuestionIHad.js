@@ -6,6 +6,7 @@ function bestArea(streetArray) {
 
     let tallestBuildingSoFar = 0;
     let tallestBuilding = Math.max(...streetArray);
+    let tallestBuildingRemaining = tallestBuilding;
 
     let bannerOneHeight = 0;
     let bannerOneWidth = 0;
@@ -21,10 +22,14 @@ function bestArea(streetArray) {
             tallestBuildingSoFar = streetArray[i];
         }
 
+        if ((streetArray[i] = tallestBuildingRemaining)) {
+            tallestBuildingRemaining = Math.max(...streetArray.slice(i + 1, streetArray.length));
+        }
+
         bannerOneHeight = tallestBuildingSoFar;
         bannerOneWidth = i + 1;
         bannerOneArea = bannerOneHeight * bannerOneWidth;
-        bannerTwoHeight = Math.max(...streetArray.slice(i + 1, streetArray.length));
+        bannerTwoHeight = tallestBuildingRemaining;
         bannerTwoWidth = numberOfBuildings - i - 1;
         bannerTwoArea = bannerTwoHeight * bannerTwoWidth;
 
