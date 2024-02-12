@@ -7,14 +7,22 @@ let numberOfBuildings = streetArray.length;
 let tallestBuildingSoFar = 0;
 let tallestBuilding = Math.max(...streetArray);
 
-let bannerOne = [tallestBuilding, numberOfBuildings, tallestBuilding * numberOfBuildings];
-let bannerTwo = [tallestBuilding, numberOfBuildings, tallestBuilding * numberOfBuildings];
+let bannerOneHeight = tallestBuilding;
+let bannerOneWidth = numberOfBuildings;
+let bannerOneArea = tallestBuilding * numberOfBuildings;
+let bannerTwoHeight = tallestBuilding;
+let bannerTwoWidth = numberOfBuildings;
+let bannerTwoArea = tallestBuilding * numberOfBuildings;
 
-let bestArea = bannerOne[2];
+let bestArea = bannerOneArea;
 
 function updateBanners(address){
-    bannerOne = [tallestBuildingSoFar, address + 1, tallestBuildingSoFar * address + 1];
-    bannerTwo = [Math.max(...streetArray.slice(address + 1, streetArray.length)), numberOfBuildings - address - 1, Math.max(...streetArray.slice(address + 1, streetArray.length)) * (numberOfBuildings - address - 1)];
+    bannerOneHeight = tallestBuildingSoFar
+    bannerOneWidth = address + 1;
+    bannerOneArea = bannerOneHeight * bannerOneWidth;
+    bannerTwoHeight = Math.max(...streetArray.slice(address + 1, streetArray.length))
+    bannerTwoWidth = numberOfBuildings - address - 1
+    bannerTwoArea = bannerTwoHeight * bannerTwoWidth;
 }
 
 for (let i = 0; i < numberOfBuildings - 1; i++){
@@ -25,8 +33,8 @@ for (let i = 0; i < numberOfBuildings - 1; i++){
     
     updateBanners(i);
     
-    if (bannerOne[2]  + bannerTwo[2] < bestArea) {
-        bestArea = bannerOne[2] + bannerTwo[2];
+    if (bannerOneArea+ bannerTwoArea < bestArea) {
+        bestArea = bannerOneArea + bannerTwoArea;
     }
 }
 
