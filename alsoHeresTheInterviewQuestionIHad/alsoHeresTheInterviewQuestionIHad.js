@@ -46,7 +46,8 @@ each element of array H is an integer within the range [1..10,000]
 */
 
 const fs = require("fs");
-const arrayBuildings = fs.readFileSync("data.txt", "utf-8").split(",");
+const arrayBuildings = fs.readFileSync("data2.txt", "utf-8").split(",");
+let desiredAnswer = arrayBuildings.pop();
 
 function bestArea(arrayStreet) {
     let numberOfBuildings = arrayStreet.length;
@@ -59,7 +60,6 @@ function bestArea(arrayStreet) {
     let bannerRightWidth = 0;
     let bannerRightHeight = 0;
     let bannerRightArea = 0;
-    let bestArea = 0;
 
     for (let i = 0; i < numberOfBuildings; i++) {
         tallestBuildingSoFar = Math.max(tallestBuildingSoFar, arrayStreet[i]);
@@ -67,7 +67,7 @@ function bestArea(arrayStreet) {
     }
 
     bannerLeftHeight = stackHeights.pop();
-    bestArea = numberOfBuildings * bannerLeftHeight;
+    let bestArea = numberOfBuildings * bannerLeftHeight;
 
     for (let i = numberOfBuildings - 1; i > 0; i--) {
         bannerRightHeight = Math.max(bannerRightHeight, arrayStreet[i]);
@@ -87,3 +87,4 @@ function bestArea(arrayStreet) {
 }
 
 console.log("The best area we can cover is " + bestArea(arrayBuildings));
+console.log("The desired answer was " + desiredAnswer);
