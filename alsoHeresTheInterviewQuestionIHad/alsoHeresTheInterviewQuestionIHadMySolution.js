@@ -46,7 +46,8 @@ each element of array H is an integer within the range [1..10,000]
 */
 
 const fs = require("fs");
-const buildings = fs.readFileSync("data.txt", "utf-8").split(",");
+const buildings = fs.readFileSync("data3.txt", "utf-8").split(",");
+let desiredAnswer = buildings.pop();
 
 function bestArea(streetArray) {
     let numberOfBuildings = streetArray.length;
@@ -94,3 +95,4 @@ function bestArea(streetArray) {
 
 bestArea(buildings);
 console.log("The best area we can cover is " + bestArea(buildings));
+console.log("The desired output should be " + desiredAnswer);
