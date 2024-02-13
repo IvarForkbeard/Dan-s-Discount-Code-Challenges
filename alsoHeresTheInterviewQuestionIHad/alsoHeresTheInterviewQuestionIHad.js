@@ -46,12 +46,11 @@ each element of array H is an integer within the range [1..10,000]
 */
 
 const fs = require("fs");
-const arrBuildings = fs.readFileSync("data.txt", "utf-8").split(",");
+const arrayBuildings = fs.readFileSync("data.txt", "utf-8").split(",");
 
-function bestArea(arrStreet) {
-    let numberOfBuildings = arrStreet.length;
-    let staHeights = new Array(numberOfBuildings);
-    staHeights.fill(0);
+function bestArea(arrayStreet) {
+    let numberOfBuildings = arrayStreet.length;
+    let stackHeights = new Array(numberOfBuildings);
     let tallestBuildingSoFar = 0;
 
     let bannerLeftWidth = 0;
@@ -60,30 +59,31 @@ function bestArea(arrStreet) {
     let bannerRightWidth = 0;
     let bannerRightHeight = 0;
     let bannerRightArea = 0;
-    let bestAreaInFunction = 0;
+    let bestArea = 0;
 
     for (let i = 0; i < numberOfBuildings; i++) {
-        tallestBuildingSoFar = Math.max(tallestBuildingSoFar, arrStreet[i]);
-        staHeights[i] = tallestBuildingSoFar;
+        tallestBuildingSoFar = Math.max(tallestBuildingSoFar, arrayStreet[i]);
+        stackHeights[i] = tallestBuildingSoFar;
     }
 
-    bannerLeftHeight = staHeights.pop();
+    bannerLeftHeight = stackHeights.pop();
+    bestArea = numberOfBuildings * bannerLeftHeight;
 
     for (let i = numberOfBuildings - 1; i > 0; i--) {
-        bannerRightHeight = Math.max(bannerRightHeight, arrStreet[i]);
-        bannerRightWidth = Math.abs(i - numberOfBuildings);
-        bannerLeftHeight = staHeights.pop();
+        bannerRightHeight = Math.max(bannerRightHeight, arrayStreet[i]);
+        bannerRightWidth = numberOfBuildings - i;
+        bannerLeftHeight = stackHeights.pop();
         bannerLeftWidth = i;
 
         bannerLeftArea = bannerLeftWidth * bannerLeftHeight;
         bannerRightArea = bannerRightWidth * bannerRightHeight;
 
-        if (bestAreaInFunction === 0 || bannerLeftArea + bannerRightArea < bestAreaInFunction) {
-            bestAreaInFunction = bannerLeftArea + bannerRightArea;
+        if (bannerLeftArea + bannerRightArea < bestArea) {
+            bestArea = bannerLeftArea + bannerRightArea;
         }
     }
 
-    return bestAreaInFunction;
+    return bestArea;
 }
 
-console.log("The best area we can cover is " + bestArea(arrBuildings));
+console.log("The best area we can cover is " + bestArea(arrayBuildings));
