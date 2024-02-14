@@ -43,11 +43,13 @@ function findThePair(input, target) {
     let pairMap = {};
 
     for (let i = 0; i < input.length; i++) {
-        if (target - input[i] in pairMap) {
-            return [pairMap[target - input[i]], i];
+        const current = input[i];
+        const need = target - current;
+        if (need in pairMap) {
+            return [pairMap[need], i];
         }
 
-        pairMap[input[i]] = i;
+        pairMap[current] = i;
     }
 
     return [-1, -1];
