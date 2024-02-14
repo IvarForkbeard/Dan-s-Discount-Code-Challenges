@@ -50,7 +50,7 @@ function findThePair(input, target) {
         object[input[i]] = i;
     }
 
-    return "Sorry, couldn't find the pair...";
+    return [-1, -1];
 }
 
 console.log("Input: nums = [" + arrayNums + "], target = " + desiredTarget);
