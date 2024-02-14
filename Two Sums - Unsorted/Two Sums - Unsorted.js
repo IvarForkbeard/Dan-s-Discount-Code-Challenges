@@ -43,7 +43,7 @@ function findThePair(input, target) {
     let object = {};
 
     for (let i = 0; i < input.length; i++) {
-        if (Number.isInteger(object[target - input[i]]) && object[target - input[i]] !== i) {
+        if (Number.isInteger(object[target - input[i]])) {
             return [object[target - input[i]], i];
         }
 
