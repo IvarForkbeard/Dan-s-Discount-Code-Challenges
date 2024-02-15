@@ -46,9 +46,9 @@ function findAnagrammes(array) {
         let sortedWord = sortLetters(word);
 
         if (anagrammeMap[sortedWord]) {
-            anagrammeMap[sortedWord] += ", " + word;
+            anagrammeMap[sortedWord].push(word);
         } else {
-            anagrammeMap[sortedWord] = word;
+            anagrammeMap[sortedWord] = [word];
         }
     }
     return Object.values(anagrammeMap);
