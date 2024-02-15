@@ -39,23 +39,19 @@ function sortLetters(word) {
 
 function findAnagrammes(array) {
     let arrayLength = array.length;
-    const anagrammeArrayIndex = [];
-    const anagrammeArray = [];
+    const anagrammeMap = {};
 
     for (let i = 0; i < arrayLength; i++) {
         let word = array[i].trim();
         let sortedWord = sortLetters(word);
-        let sortedWordPosition = anagrammeArrayIndex.indexOf(sortedWord);
 
-        if (sortedWordPosition >= 0) {
-            anagrammeArray[sortedWordPosition].push(word);
+        if (anagrammeMap[sortedWord]) {
+            anagrammeMap[sortedWord] += ", " + word;
         } else {
-            anagrammeArrayIndex[i] = sortedWord;
-            anagrammeArray[i] = [word];
+            anagrammeMap[sortedWord] = word;
         }
     }
-
-    return anagrammeArray.filter(Boolean);
+    return Object.values(anagrammeMap);
 }
 
 console.log(findAnagrammes(strs));
